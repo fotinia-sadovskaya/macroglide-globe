@@ -7,6 +7,8 @@ import { exchanges } from "../data/exchanges";
 import ExchangeDot from './ExchangeDot';
 import { Exchange } from '../types/Exchange';
 
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+
 {exchanges.map((exchange, idx) => (
   <ExchangeDot key={idx} exchange={exchange} />
 ))}
@@ -53,6 +55,17 @@ useEffect(() => {
     const dot = new THREE.Mesh(dotGeometry, dotMaterial);
     dot.position.copy(pos);
     scene.add(dot);
+  });
+
+  // ⬇️ Завантаження моделі всередині useEffect
+  const loader = new GLTFLoader();
+  loader.load('/models/earth.glb', (gltf) => {
+    const model = gltf.scene;
+    model.scale.set(1, 1, 1);
+    model.position.set(0, 0, 0);
+    scene.add(model); // ✅ тепер scene доступна
+  }, undefined, (error) => {
+    console.error('Помилка завантаження моделі:', error);
   });
 
   const animate = () => {
