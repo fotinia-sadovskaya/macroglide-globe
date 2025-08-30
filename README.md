@@ -26,15 +26,17 @@ npm run dev
 ```plaintext
 macroglide-globe/
 ├── public/                  # Статичні файли (текстура глобуса, favicon тощо)
+│   ├── models/  
+│      └── earth.glb
 │   └── earth_texture.jpg    
 ├── src/
 │ ├── data/
 │   ├── exchanges.js         # Окремий файл з координатами бірж.
 │   └── exchanges.ts         
 │ ├── types/
-│   └── Exchange.ts
+│     └── Exchange.ts
 │ ├── utils/
-│   └── utils.js             # Утилітарні функції, зокрема latLongToVector3
+│     └── utils.js           # Утилітарні функції, зокрема latLongToVector3
 │ ├── assets/                # Зображення, текстури, медіа
 │ ├── components/            # React-компоненти (Globe, точки, панелі)
 │     ├── ExchangeDot.jsx         
