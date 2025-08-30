@@ -24,12 +24,19 @@ npm run dev
 ## 📁 Структура
 
 ```plaintext
-src/
-├── components/
-├── pages/
-├── assets/
-├── services/
-└── App.jsx
+macroglide-globe/
+├── public/               # Статичні файли (текстура глобуса, favicon тощо)
+├── src/
+│ ├── assets/             # Зображення, текстури, медіа
+│ ├── components/         # React-компоненти (Globe, точки, панелі)
+│ ├── styles/             # CSS або Tailwind-конфігурації
+│ ├── App.jsx             # Головний компонент додатку
+│ └── main.jsx            # Точка входу в додаток
+├── .gitignore            # Файли, які не потрапляють у репозиторій
+├── README.md             # Документація проєкту
+├── index.html            # HTML-шаблон для Vite
+├── package.json          # Залежності та скрипти
+└──vite.config.js         # Налаштування Vite
 ```
 
 ## 🧠 Функціонал
