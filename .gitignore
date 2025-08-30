@@ -1,3 +1,21 @@
+# Node.js
+node_modules/
+dist/
+.env
+*.log
+
+# Vite
+.vite/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# VS Code
+.vscode/
+
 # Logs
 logs
 *.log
