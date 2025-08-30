@@ -28,9 +28,18 @@ macroglide-globe/
 ├── public/                  # Статичні файли (текстура глобуса, favicon тощо)
 │   └── earth_texture.jpg    
 ├── src/
+│ ├── data/
+│   ├── exchanges.js         # Окремий файл з координатами бірж.
+│   └── exchanges.ts         
+│ ├── types/
+│   └── Exchange.ts
+│ ├── utils/
+│   └── utils.js             # Утилітарні функції, зокрема latLongToVector3
 │ ├── assets/                # Зображення, текстури, медіа
 │ ├── components/            # React-компоненти (Globe, точки, панелі)
-│ │   └── Globe.jsx            
+│     ├── ExchangeDot.jsx         
+│     ├── ExchangeObj.tsx  
+│     └── GlobeScene.jsx     # Логіка Three.js: глобус, лінії, світло, камера.
 │ ├── styles/                # CSS або Tailwind-конфігурації
 │ ├── App.jsx                # Головний компонент додатку
 │ └── main.jsx               # Точка входу в додаток
