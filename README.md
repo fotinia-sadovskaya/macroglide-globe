@@ -25,18 +25,20 @@ npm run dev
 
 ```plaintext
 macroglide-globe/
-├── public/               # Статичні файли (текстура глобуса, favicon тощо)
+├── public/                  # Статичні файли (текстура глобуса, favicon тощо)
+│   └── earth_texture.jpg    
 ├── src/
-│ ├── assets/             # Зображення, текстури, медіа
-│ ├── components/         # React-компоненти (Globe, точки, панелі)
-│ ├── styles/             # CSS або Tailwind-конфігурації
-│ ├── App.jsx             # Головний компонент додатку
-│ └── main.jsx            # Точка входу в додаток
-├── .gitignore            # Файли, які не потрапляють у репозиторій
-├── README.md             # Документація проєкту
-├── index.html            # HTML-шаблон для Vite
-├── package.json          # Залежності та скрипти
-└──vite.config.js         # Налаштування Vite
+│ ├── assets/                # Зображення, текстури, медіа
+│ ├── components/            # React-компоненти (Globe, точки, панелі)
+│ │   └── Globe.jsx            
+│ ├── styles/                # CSS або Tailwind-конфігурації
+│ ├── App.jsx                # Головний компонент додатку
+│ └── main.jsx               # Точка входу в додаток
+├── .gitignore               # Файли, які не потрапляють у репозиторій
+├── README.md                # Документація проєкту
+├── index.html               # HTML-шаблон для Vite
+├── package.json             # Залежності та скрипти
+└──vite.config.js            # Налаштування Vite
 ```
 
 ## 🧠 Функціонал
