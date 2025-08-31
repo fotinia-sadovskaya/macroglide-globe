@@ -9,6 +9,8 @@ import { Exchange } from '../types/Exchange';
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
+const material = new THREE.MeshStandardMaterial({ color: 0x0077be });
+
 {exchanges.map((exchange, idx) => (
   <ExchangeDot key={idx} exchange={exchange} />
 ))}
@@ -81,7 +83,8 @@ useEffect(() => {
   };
 }, []);
 
-  return <div ref={mountRef} />;
+  return <div ref={mountRef} style={{ width: '100vw', height: '100vh' }} />;
+
 };
 
 export default GlobeScene;
