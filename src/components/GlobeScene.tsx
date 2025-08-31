@@ -3,9 +3,10 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { latLongToVector3 } from "../utils/utils";
 import { exchanges } from "../data/exchanges";
+import './GlobeScene.css';
 
 import ExchangeDot from "./ExchangeDot";
-import { Exchange } from "../../data/Types/Exchange";
+import { Exchange } from "../data/Types/Exchange";
 
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
@@ -16,10 +17,11 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 }
 
 const GlobeScene = () => {
-  const mountRef = useRef(null);
+  const mountRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const mountNode = mountRef.current; // ✅ зберігаємо ref
+    if (!mountNode) return; // ⬅️ Додай це одразу після присвоєння
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
@@ -55,8 +57,15 @@ const GlobeScene = () => {
       const dotMaterial = new THREE.MeshBasicMaterial({ color: 0xff00ff });
       const dot = new THREE.Mesh(dotGeometry, dotMaterial);
       dot.position.copy(pos);
-      dot.name = exchange.name; // 👈 додаємо ім’я для Raycaster
-      globe.add(dot); // 👈 додаємо до глобуса
+
+      dot.name = exchange.name;
+      dot.userData = {
+        info: exchange.description,
+        logo: exchange.logoUrl, // 👈 додай URL логотипу
+        chart: exchange.chartUrl, // 👈 або графік
+      };
+
+      globe.add(dot);
     });
 
     // ⬇️ Завантаження моделі всередині useEffect
@@ -100,12 +109,61 @@ const GlobeScene = () => {
     };
     animate();
 
+    const tooltip = document.getElementById("tooltip");
+    const infoBox = document.getElementById("infoBox");
+    if (!tooltip || !infoBox) return; // ⬅️ перевірка на null
+
+    window.addEventListener("click", (event) => {
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObjects(globe.children);
+
+      if (intersects.length > 0) {
+        const dot = intersects[0].object;
+        infoBox.style.display = "block";
+        infoBox.style.left = `${event.clientX}px`;
+        infoBox.style.top = `${event.clientY}px`;
+        infoBox.style.opacity = "1";
+        infoBox.style.transform = "scale(1)";
+
+        infoBox.innerHTML = `
+      <strong>${dot.name}</strong><br/>
+      ${dot.userData.info || "Немає опису"}<br/>
+      ${
+        dot.userData.logo ? `<img src="${dot.userData.logo}" width="80" />` : ""
+      }
+      ${
+        dot.userData.chart
+          ? `<img src="${dot.userData.chart}" width="120" />`
+          : ""
+      }
+    `;
+      } else {
+        // 👇 Закриття при кліку поза вікном
+        if (!infoBox.contains(event.target as Node)) {
+          infoBox.style.opacity = "0";
+          infoBox.style.transform = "scale(0.95)";
+          setTimeout(() => {
+            infoBox.style.display = "none";
+          }, 300);
+        }
+      }
+    });
+
     return () => {
       mountNode.removeChild(renderer.domElement); // ✅ використовуємо ту саму змінну
     };
   }, []);
 
-  return <div ref={mountRef} style={{ width: "100vw", height: "100vh" }} />;
+ return (
+  <>
+    <div ref={mountRef} className="fullscreen" />
+    <div id="tooltip"></div>
+    <div id="infoBox"></div>
+  </>
+);
 };
 
 export default GlobeScene;

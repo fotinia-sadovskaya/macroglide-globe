@@ -6,5 +6,9 @@ export type Exchange = {
   last: number;
   buy: number;
   sell: number;
-  logo?: string; // опціонально: шлях до логотипу
+  logoUrl?: string;
+  chartUrl?: string;
+  description?: string;
+  logo?: string;
 };
+
