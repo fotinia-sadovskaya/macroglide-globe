@@ -1,4 +1,4 @@
-import { Exchange } from '../components/Types/Exchange';
+import { Exchange } from './Types/Exchange';
 
 export const exchanges: Exchange[] = [
   {
