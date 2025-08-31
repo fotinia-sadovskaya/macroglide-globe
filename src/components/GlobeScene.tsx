@@ -34,7 +34,7 @@ useEffect(() => {
   mountNode.appendChild(renderer.domElement); // ✅ використовуємо збережений ref
 
   const geometry = new THREE.SphereGeometry(1, 64, 64);
-  const texture = new THREE.TextureLoader().load("/earth_texture.jpg");
+  const texture = new THREE.TextureLoader().load("/earth_texture.jpeg");
   const material = new THREE.MeshStandardMaterial({ map: texture });
   const globe = new THREE.Mesh(geometry, material);
   scene.add(globe);
@@ -48,14 +48,15 @@ useEffect(() => {
   const controls = new OrbitControls(camera, renderer.domElement);
 
   const radius = 1.01;
-  exchanges.forEach((exchange) => {
-    const pos = latLongToVector3(exchange.lat, exchange.lon, radius);
-    const dotGeometry = new THREE.SphereGeometry(0.01, 8, 8);
-    const dotMaterial = new THREE.MeshBasicMaterial({ color: 0xff00ff });
-    const dot = new THREE.Mesh(dotGeometry, dotMaterial);
-    dot.position.copy(pos);
-    scene.add(dot);
-  });
+exchanges.forEach((exchange) => {
+  const pos = latLongToVector3(exchange.lat, exchange.lon, radius);
+  const dotGeometry = new THREE.SphereGeometry(0.01, 8, 8);
+  const dotMaterial = new THREE.MeshBasicMaterial({ color: 0xff00ff });
+  const dot = new THREE.Mesh(dotGeometry, dotMaterial);
+  dot.position.copy(pos);
+  dot.name = exchange.name; // 👈 додаємо ім’я для Raycaster
+  globe.add(dot); // 👈 додаємо до глобуса
+});
 
   // ⬇️ Завантаження моделі всередині useEffect
   const loader = new GLTFLoader();
@@ -67,6 +68,23 @@ useEffect(() => {
   }, undefined, (error) => {
     console.error('Помилка завантаження моделі:', error);
   });
+
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
+window.addEventListener('click', (event) => {
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  raycaster.setFromCamera(mouse, camera);
+  const intersects = raycaster.intersectObjects(globe.children);
+
+  if (intersects.length > 0) {
+    const clickedDot = intersects[0].object;
+    console.log('Clicked on:', clickedDot.name);
+    // Можна додати логіку: показати інфо, змінити колір, тощо
+  }
+});
 
   const animate = () => {
     requestAnimationFrame(animate);
