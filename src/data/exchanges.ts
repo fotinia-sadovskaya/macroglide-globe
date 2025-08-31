@@ -9,6 +9,7 @@ export const exchanges: Exchange[] = [
     last: 27450,
     buy: 27400,
     sell: 27500,
+    logo: '/logos/binance.png',
   },
   {
     name: 'Coinbase',
@@ -18,6 +19,7 @@ export const exchanges: Exchange[] = [
     last: 27480,
     buy: 27430,
     sell: 27530,
+    logo: '/logos/coinbase.png',
   },
   {
     name: 'NYSE',
@@ -27,6 +29,7 @@ export const exchanges: Exchange[] = [
     last: 27320,
     buy: 27270,
     sell: 27370,
+    logo: '/logos/nyse.png',
   },
   {
     name: 'NASDAQ',
@@ -36,6 +39,7 @@ export const exchanges: Exchange[] = [
     last: 27350,
     buy: 27300,
     sell: 27400,
+    logo: '/logos/nasdaq.png',
   },
   {
     name: 'LSE',
@@ -45,6 +49,7 @@ export const exchanges: Exchange[] = [
     last: 27290,
     buy: 27240,
     sell: 27340,
+    logo: '/logos/lse.png',
   },
   {
     name: 'Tokyo SE',
@@ -54,6 +59,7 @@ export const exchanges: Exchange[] = [
     last: 27510,
     buy: 27460,
     sell: 27560,
+    logo: '/logos/tokyo.png',
   },
   {
     name: 'Hong Kong',
@@ -63,6 +69,7 @@ export const exchanges: Exchange[] = [
     last: 27390,
     buy: 27340,
     sell: 27440,
+    logo: '/logos/hongkong.png',
   },
   {
     name: 'Shanghai SE',
@@ -72,6 +79,7 @@ export const exchanges: Exchange[] = [
     last: 27420,
     buy: 27370,
     sell: 27470,
+    logo: '/logos/shanghai.png',
   },
   {
     name: 'Euronext',
@@ -81,6 +89,7 @@ export const exchanges: Exchange[] = [
     last: 27300,
     buy: 27250,
     sell: 27350,
+    logo: '/logos/euronext.png',
   },
   {
     name: 'TSX',
@@ -90,6 +99,7 @@ export const exchanges: Exchange[] = [
     last: 27410,
     buy: 27360,
     sell: 27460,
+    logo: '/logos/tsx.png',
   },
   {
     name: 'BSE India',
@@ -99,6 +109,7 @@ export const exchanges: Exchange[] = [
     last: 27380,
     buy: 27330,
     sell: 27430,
+    logo: '/logos/bse.png',
   },
   {
     name: 'ASX',
@@ -108,5 +119,6 @@ export const exchanges: Exchange[] = [
     last: 27400,
     buy: 27350,
     sell: 27450,
+    logo: '/logos/asx.png',
   },
 ];

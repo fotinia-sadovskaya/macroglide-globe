@@ -1,5 +1,7 @@
 // exchanges.js
 export const exchanges = [
+  { name: 'Binance', lat: 0, lon: 0 },
+  { name: 'Coinbase', lat: 37.7749, lon: -122.4194 },
   { name: 'NYSE', lat: 40.7069, lon: -74.0113 },
   { name: 'NASDAQ', lat: 40.7570, lon: -73.9855 },
   { name: 'LSE', lat: 51.5074, lon: -0.1278 },
