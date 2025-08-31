@@ -3,7 +3,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { latLongToVector3 } from "../utils/utils";
 import { exchanges } from "../data/exchanges";
-import './GlobeScene.css';
+import "./GlobeScene.css";
 
 import ExchangeDot from "./ExchangeDot";
 import { Exchange } from "../data/Types/Exchange";
@@ -20,6 +20,17 @@ const GlobeScene = () => {
   const mountRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // 🔧 Контроль обертання
+    let rotationPaused = false;
+
+    function pauseRotation() {
+      rotationPaused = true;
+    }
+
+    function resumeRotation() {
+      rotationPaused = false;
+    }
+
     const mountNode = mountRef.current; // ✅ зберігаємо ref
     if (!mountNode) return; // ⬅️ Додай це одразу після присвоєння
 
@@ -103,15 +114,47 @@ const GlobeScene = () => {
 
     const animate = () => {
       requestAnimationFrame(animate);
-      globe.rotation.y += 0.001;
+      if (!rotationPaused) {
+        globe.rotation.y += 0.001;
+      }
       controls.update();
       renderer.render(scene, camera);
     };
+
     animate();
 
     const tooltip = document.getElementById("tooltip");
     const infoBox = document.getElementById("infoBox");
     if (!tooltip || !infoBox) return; // ⬅️ перевірка на null
+
+    window.addEventListener("mousemove", (event) => {
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObjects(globe.children);
+
+      if (intersects.length > 0) {
+        const dot = intersects[0].object;
+        tooltip.style.display = "block";
+        tooltip.style.left = `${event.clientX + 10}px`;
+        tooltip.style.top = `${event.clientY + 10}px`;
+        tooltip.style.opacity = "1";
+        tooltip.innerHTML = `
+      ${
+        dot.userData.logo
+          ? `<img src="${dot.userData.logo}" width="20" style="vertical-align:middle;margin-right:6px;" />`
+          : ""
+      }
+      <span>${dot.name}</span>
+    `;
+        pauseRotation();
+      } else {
+        tooltip.style.opacity = "0";
+        tooltip.style.display = "none";
+        resumeRotation();
+      }
+    });
 
     window.addEventListener("click", (event) => {
       mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -157,13 +200,13 @@ const GlobeScene = () => {
     };
   }, []);
 
- return (
-  <>
-    <div ref={mountRef} className="fullscreen" />
-    <div id="tooltip"></div>
-    <div id="infoBox"></div>
-  </>
-);
+  return (
+    <>
+      <div ref={mountRef} className="fullscreen" />
+      <div id="tooltip"></div>
+      <div id="infoBox"></div>
+    </>
+  );
 };
 
 export default GlobeScene;
