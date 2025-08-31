@@ -5,7 +5,7 @@ import { latLongToVector3 } from "../utils/utils";
 import { exchanges } from "../data/exchanges";
 
 import ExchangeDot from './ExchangeDot';
-import { Exchange } from './types/Exchange';
+import { Exchange } from './Types/Exchange';
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
