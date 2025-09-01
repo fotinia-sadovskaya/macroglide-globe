@@ -20,6 +20,8 @@ const GlobeScene = () => {
   const mountRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    let clickedOnDot = false;
+
     // 🔧 Контроль обертання
     let rotationPaused = false;
 
@@ -98,6 +100,61 @@ const GlobeScene = () => {
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
 
+    const tooltip = document.getElementById("tooltip");
+    const infoBox = document.getElementById("infoBox");
+    if (!tooltip || !infoBox) return; // ⬅️ перевірка на null
+
+    /*
+    window.addEventListener("click", (event) => {
+      clickedOnDot = false; // скидаємо перед кожним кліком
+
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObjects(globe.children);
+
+      if (intersects.length > 0) {
+        const dot = intersects[0].object;
+        clickedOnDot = true;
+
+        infoBox.style.display = "block";
+        infoBox.style.left = `${event.clientX}px`;
+        infoBox.style.top = `${event.clientY}px`;
+        infoBox.style.opacity = "1";
+        infoBox.style.transform = "scale(1)";
+
+        const name = dot.name || "Невідомо";
+        const description = dot.userData?.info || "Немає опису";
+        const logo = dot.userData?.logo
+          ? `<img src="${dot.userData.logo}" width="80" style="margin-top:6px;" />`
+          : "";
+        const chart = dot.userData?.chart
+          ? `<img src="${dot.userData.chart}" width="120" style="margin-top:6px;" />`
+          : "";
+
+        infoBox.innerHTML = `
+        <strong>${name}</strong><br/>
+        ${description}<br/>
+        ${logo}
+        ${chart}
+        <br/>
+        <button onclick="document.getElementById('infoBox').style.display='none'" style="margin-top:10px;">Закрити</button>
+      `;
+      }
+
+      // Закриття при кліку поза точкою і поза вікном
+      if (!clickedOnDot && infoBox && !infoBox.contains(event.target as Node)) {
+        infoBox.style.opacity = "0";
+        infoBox.style.transform = "scale(0.95)";
+        setTimeout(() => {
+          infoBox.style.display = "none";
+          infoBox.innerHTML = "";
+        }, 300);
+      }
+    });
+     */
+
     window.addEventListener("click", (event) => {
       mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
       mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -122,10 +179,6 @@ const GlobeScene = () => {
     };
 
     animate();
-
-    const tooltip = document.getElementById("tooltip");
-    const infoBox = document.getElementById("infoBox");
-    if (!tooltip || !infoBox) return; // ⬅️ перевірка на null
 
     window.addEventListener("mousemove", (event) => {
       mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
