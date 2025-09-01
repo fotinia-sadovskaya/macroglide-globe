@@ -8,7 +8,11 @@ import "./GlobeScene.css";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 const GlobeScene = () => {
+   // 🔧 Ref для DOM-елемента, в який буде вставлено WebGL canvas
   const mountRef = useRef<HTMLDivElement>(null);
+
+// 🧠 Ref для збереження стану кліку на точку (зберігається між рендерами)
+  const clickedOnDotRef = useRef(false); // 🔒 Зберігає стан кліку на точку
 
   useEffect(() => {
     let clickedOnDot = false; // 🟣 Відстежуємо, чи клік був по точці
