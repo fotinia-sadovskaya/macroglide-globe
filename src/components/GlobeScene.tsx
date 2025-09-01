@@ -108,7 +108,7 @@ const GlobeScene = () => {
             ? `<img src="${dot.userData.logo}" width="20" style="vertical-align:middle;margin-right:6px;" />`
             : ""
         }
-        <span>${dot.name}</span>
+        <span>${dot.userData.name ?? "—"}</span>
       `;
         pauseRotation();
       } else {
@@ -132,6 +132,9 @@ const GlobeScene = () => {
         const dot = intersects[0].object;
         clickedOnDotRef.current = true;
 
+        console.log("Clicked dot data:", dot.userData);
+
+        // ❌ Показуємо infoBox
         infoBox.style.display = "block";
         infoBox.style.left = `${event.clientX}px`;
         infoBox.style.top = `${event.clientY}px`;
