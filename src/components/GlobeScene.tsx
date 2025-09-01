@@ -8,21 +8,20 @@ import "./GlobeScene.css";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 const GlobeScene = () => {
-   // 🔧 Ref для DOM-елемента, в який буде вставлено WebGL canvas
+  // 🔧 Ref для DOM-елемента, в який буде вставлено WebGL canvas
   const mountRef = useRef<HTMLDivElement>(null);
 
-// 🧠 Ref для збереження стану кліку на точку (зберігається між рендерами)
+  // 🧠 Ref для збереження стану кліку на точку (зберігається між рендерами)
   const clickedOnDotRef = useRef(false); // 🔒 Зберігає стан кліку на точку
 
   useEffect(() => {
-    let clickedOnDot = false; // 🟣 Відстежуємо, чи клік був по точці
-    let rotationPaused = false; // 🔄 Контроль обертання
+    // 🧠 Ref для збереження стану кліку на точку
+    //clickedOnDotRef = { current: false };
 
+    // 🔄 Контроль обертання глобуса
+    let rotationPaused = false;
     const pauseRotation = () => (rotationPaused = true);
     const resumeRotation = () => (rotationPaused = false);
-
-    const mountNode = mountRef.current;
-    if (!mountNode) return;
 
     // 🎬 Ініціалізація сцени
     const scene = new THREE.Scene();
@@ -36,6 +35,8 @@ const GlobeScene = () => {
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
+    const mountNode = mountRef.current;
+    if (!mountNode) return;
     mountNode.appendChild(renderer.domElement);
 
     // 🌍 Створення глобуса
@@ -54,6 +55,15 @@ const GlobeScene = () => {
     // 🎮 Контролер обертання
     const controls = new OrbitControls(camera, renderer.domElement);
 
+    // 📦 Завантаження моделі
+    const loader = new GLTFLoader();
+    loader.load("/models/earth.glb", (gltf) => {
+      const model = gltf.scene;
+      model.scale.set(1, 1, 1);
+      model.position.set(0, 0, 0);
+      scene.add(model);
+    });
+
     // 📍 Додавання точок бірж
     const radius = 1.01;
     exchanges.forEach((exchange) => {
@@ -64,33 +74,22 @@ const GlobeScene = () => {
       );
       dot.position.copy(pos);
       dot.name = exchange.name;
-      dot.userData = {
-        info: exchange.description,
-        logo: exchange.logoUrl,
-        chart: exchange.chartUrl,
-      };
+      dot.userData = { ...exchange };
+
       globe.add(dot);
     });
 
-    // 📦 Завантаження моделі
-    const loader = new GLTFLoader();
-    loader.load("/models/earth.glb", (gltf) => {
-      const model = gltf.scene;
-      model.scale.set(1, 1, 1);
-      model.position.set(0, 0, 0);
-      scene.add(model);
-    });
-
-    // 🧠 Ініціалізація інструментів
+    // 🧭 Raycaster для визначення об'єкта під курсором
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
 
+    // 📦 DOM-елементи
     const tooltip = document.getElementById("tooltip");
     const infoBox = document.getElementById("infoBox");
     if (!tooltip || !infoBox) return;
 
     // 🖱 Наведення миші — показує tooltip
-    window.addEventListener("mousemove", (event) => {
+    const handleMouseMove = (event: MouseEvent) => {
       mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
       mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
@@ -104,24 +103,24 @@ const GlobeScene = () => {
         tooltip.style.top = `${event.clientY + 10}px`;
         tooltip.style.opacity = "1";
         tooltip.innerHTML = `
-          ${
-            dot.userData.logo
-              ? `<img src="${dot.userData.logo}" width="20" style="vertical-align:middle;margin-right:6px;" />`
-              : ""
-          }
-          <span>${dot.name}</span>
-        `;
+        ${
+          dot.userData.logo
+            ? `<img src="${dot.userData.logo}" width="20" style="vertical-align:middle;margin-right:6px;" />`
+            : ""
+        }
+        <span>${dot.name}</span>
+      `;
         pauseRotation();
       } else {
         tooltip.style.opacity = "0";
         tooltip.style.display = "none";
         resumeRotation();
       }
-    });
+    };
 
     // 🖱 Клік — показує або ховає infoBox
-    window.addEventListener("click", (event) => {
-      clickedOnDot = false;
+    const handleClick = (event: MouseEvent) => {
+      clickedOnDotRef.current = false;
 
       mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
       mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -131,7 +130,7 @@ const GlobeScene = () => {
 
       if (intersects.length > 0) {
         const dot = intersects[0].object;
-        clickedOnDot = true;
+        clickedOnDotRef.current = true;
 
         infoBox.style.display = "block";
         infoBox.style.left = `${event.clientX}px`;
@@ -141,38 +140,56 @@ const GlobeScene = () => {
         infoBox.style.transition = "opacity 0.5s ease, transform 0.3s ease";
 
         infoBox.innerHTML = `
-          <strong>${dot.name}</strong><br/>
-          ${dot.userData.info || "Немає опису"}<br/>
-          ${
-            dot.userData.logo
-              ? `<img src="${dot.userData.logo}" width="80" style="margin-top:6px;" />`
-              : ""
-          }
-          ${
-            dot.userData.chart
-              ? `<img src="${dot.userData.chart}" width="120" style="margin-top:6px;" />`
-              : ""
-          }
-          <br/>
-          <button id="closeInfoBox" style="margin-top:10px;">Закрити</button>
-        `;
+  <div style="position:relative; padding:12px; max-width:280px;">
+    <div id="infoBoxClose" style="position:absolute; top:8px; right:8px; cursor:pointer;">✖</div>
+    <div style="display:flex; align-items:center; gap:10px;">
+      ${
+        dot.userData.logo
+          ? `<img src="${dot.userData.logo}" width="40" height="40" style="object-fit:contain;" />`
+          : `<div style="width:40px; height:40px; background:#ccc; border-radius:4px;"></div>`
+      }
+      <div>
+        <strong style="font-size:16px;">${
+          dot.userData.name || "—"
+        }</strong><br/>
+        <span style="font-size:13px; color:#666;">${
+          dot.userData.country || "Країна невідома"
+        }</span>
+      </div>
+    </div>
+    <p style="margin-top:10px; font-size:14px;">
+      ${dot.userData.description || "<em>Опис недоступний</em>"}
+    </p>
+    <div style="margin-top:10px; font-size:13px;">
+      <strong>Ціна:</strong><br/>
+      🔹 <strong>Last:</strong> ${dot.userData.last ?? "—"}<br/>
+      🟢 <strong>Buy:</strong> ${dot.userData.buy ?? "—"}<br/>
+      🔴 <strong>Sell:</strong> ${dot.userData.sell ?? "—"}
+    </div>
+    ${
+      dot.userData.chart
+        ? `<img src="${dot.userData.chart}" width="100%" style="margin-top:10px; border-radius:4px;" />`
+        : ""
+    }
+  </div>
+`;
 
-        // ⏱ Таймер закриття після натискання кнопки
-        const closeBtn = document.getElementById("closeInfoBox");
-        if (closeBtn) {
-          closeBtn.addEventListener("click", () => {
+        // ❌ Обробник закриття вікна
+        const closeIcon = document.getElementById("infoBoxClose");
+        if (closeIcon) {
+          closeIcon.addEventListener("click", () => {
             infoBox.style.opacity = "0";
             infoBox.style.transform = "scale(0.95)";
             setTimeout(() => {
               infoBox.style.display = "none";
               infoBox.innerHTML = "";
-            }, 500); // ⏳ Плавне закриття
+            }, 500);
           });
         }
       }
 
       // ❌ Клік поза точкою і поза вікном — закриваємо
-      if (!clickedOnDot && !infoBox.contains(event.target as Node)) {
+      if (!clickedOnDotRef.current && !infoBox.contains(event.target as Node)) {
         infoBox.style.opacity = "0";
         infoBox.style.transform = "scale(0.95)";
         setTimeout(() => {
@@ -180,7 +197,7 @@ const GlobeScene = () => {
           infoBox.innerHTML = "";
         }, 500);
       }
-    });
+    };
 
     // 🔁 Анімація сцени
     const animate = () => {
@@ -191,8 +208,14 @@ const GlobeScene = () => {
     };
     animate();
 
-    // 🧹 При демонтажі компонента
+    // 📌 Додаємо обробники
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("click", handleClick);
+
+    // 🧹 Очищення при демонтажі
     return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("click", handleClick);
       mountNode.removeChild(renderer.domElement);
     };
   }, []);
