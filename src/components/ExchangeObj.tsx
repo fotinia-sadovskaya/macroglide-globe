@@ -1,4 +1,4 @@
-import { Exchange } from '../data/Types/Exchange';
+import { Exchange } from "../data/Types/Exchange";
 
 type Props = {
   exchange: Exchange;
