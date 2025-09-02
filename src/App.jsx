@@ -38,8 +38,8 @@ export default App
 */
 
 // ✅ Активний код: підключення GlobeScene
-import React from 'react';
-import GlobeScene from './components/GlobeScene';
+import React from "react";
+import GlobeScene from "./components/GlobeScene";
 
 function App() {
   return (
@@ -50,4 +50,3 @@ function App() {
 }
 
 export default App;
-
