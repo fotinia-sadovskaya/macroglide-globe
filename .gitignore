@@ -8,6 +8,10 @@ tsconfig.json
 .vscode/
 .env
 .gitignore
+*.log
+*.tsbuildinfo
+*.eslintcache
+*.stylelintcache
 
 # Дозволити лише білд
 !index.html
