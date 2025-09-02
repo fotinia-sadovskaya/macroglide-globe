@@ -5,4 +5,3 @@ export default defineConfig({
   base: "/macroglide-globe/", // ← назва репозиторію на GitHub
   plugins: [react()],
 });
-
