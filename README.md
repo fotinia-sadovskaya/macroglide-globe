@@ -12,7 +12,7 @@
 - [x] `Vite`
 - [x] `React` / `Vue` — для UI
 - [x] `TypeScript` (опціонально)
-- [x] ``TailwindCSS` / `Styled Components`
+- [x] `TailwindCSS` / `Styled Components`
 - [x] `Axios` / `Fetch API` — для отримання біржових даних
 - [x] `D3.js` або `Chart.js` (для графіків)
 - [x] `GeoJSON` — для географічного розташування точок
