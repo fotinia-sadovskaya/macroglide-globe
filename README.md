@@ -116,6 +116,25 @@ MIT — вільне використання з зазначенням авто
 
 ---
 
+## 🌍 Світові біржі
+
+| Біржа           | Логотип                                 | Країна           |
+|-----------------|------------------------------------------|------------------|
+| Binance         | ![Binance](./public/logos/binance.png)   | 🌐 Глобальна     |
+| Coinbase        | ![Coinbase](./public/logos/coinbase.png) | 🇺🇸 США          |
+| NYSE            | ![NYSE](./public/logos/nyse.png)         | 🇺🇸 США          |
+| NASDAQ          | ![NASDAQ](./public/logos/nasdaq.png)     | 🇺🇸 США          |
+| LSE             | ![LSE](./public/logos/lse.png)           | 🇬🇧 Велика Британія |
+| Tokyo SE        | ![Tokyo SE](./public/logos/tokyo.png)    | 🇯🇵 Японія       |
+| Hong Kong SE    | ![Hong Kong](./public/logos/hongkong.png)| 🇭🇰 Гонконг       |
+| Shanghai SE     | ![Shanghai SE](./public/logos/shanghai.png)| 🇨🇳 Китай      |
+| Euronext        | ![Euronext](./public/logos/euronext.png) | 🇪🇺 Європа        |
+| TSX             | ![TSX](./public/logos/tsx.png)           | 🇨🇦 Канада        |
+| BSE India       | ![BSE](./public/logos/bse.png)           | 🇮🇳 Індія         |
+| ASX             | ![ASX](./public/logos/asx.png)           | 🇦🇺 Австралія     |
+
+---
+
 ### 🇨🇳 Приклад: Shanghai Stock Exchange
 
 > **Shanghai SE** — найбільша біржа материкового Китаю, що відіграє ключову роль у розвитку економіки країни.
