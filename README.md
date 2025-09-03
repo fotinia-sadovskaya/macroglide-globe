@@ -37,6 +37,8 @@ npm run dev
 ```plaintext
 macroglide-globe/
 ├── public/                  # Статичні файли (текстура глобуса, favicon тощо)
+│   ├── logos/  
+│      └── earth.glb
 │   ├── models/  
 │      └── earth.glb
 │   └── earth_texture.jpg    
@@ -110,3 +112,9 @@ MIT — вільне використання з зазначенням авто
 ## 🌍🖼️ Візуалізація глобуса з біржами
 
 [![Глобус з біржами](./screenshots/globe.png)](./screenshots/globe.png)
+
+---
+
+## 🌐 Онлайн версія
+
+[👉 Відкрити MACROGLIDE Globe](https://fotinia-sadovskaya.github.io/macroglide-globe/)
