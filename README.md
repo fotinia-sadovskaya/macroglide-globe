@@ -36,33 +36,52 @@ npm run dev
 
 ```plaintext
 macroglide-globe/
-├── public/                  # Статичні файли (текстура глобуса, favicon тощо)
-│   ├── logos/  
-│      └── earth.glb
-│   ├── models/  
-│      └── earth.glb
-│   └── earth_texture.jpg    
-├── src/
-│ ├── data/
-│   ├── exchanges.js         # Окремий файл з координатами бірж.
-│   └── exchanges.ts         
-│ ├── types/
-│     └── Exchange.ts
-│ ├── utils/
-│     └── utils.js           # Утилітарні функції, зокрема latLongToVector3
-│ ├── assets/                # Зображення, текстури, медіа
-│ ├── components/            # React-компоненти (Globe, точки, панелі)
-│     ├── ExchangeDot.jsx         
-│     ├── ExchangeObj.tsx  
-│     └── GlobeScene.jsx     # Логіка Three.js: глобус, лінії, світло, камера.
-│ ├── styles/                # CSS або Tailwind-конфігурації
-│ ├── App.jsx                # Головний компонент додатку
-│ └── main.jsx               # Точка входу в додаток
-├── .gitignore               # Файли, які не потрапляють у репозиторій
-├── README.md                # Документація проєкту
-├── index.html               # HTML-шаблон для Vite
-├── package.json             # Залежності та скрипти
-└──vite.config.js            # Налаштування Vite
+├── public/                          # Статичні файли, доступні напряму з браузера
+│   ├── logos/                       # Логотипи бірж (PNG)
+│   │   └── logo.png
+│   ├── models/                      # 3D-моделі для Three.js (GLB, GLTF)
+│   │   └── earth.glb
+│   ├── earth_texture.jpeg          # Текстура глобуса
+│   └── favicon.png                 # Іконка сайту (відображається у вкладці браузера)
+│
+├── screenshots/                    # Прев’ю або знімки екрану для README / соцмереж
+│   └── globe.png
+│
+├── src/                            # Вихідний код додатку
+│   ├── assets/                     # Локальні медіа-файли (текстури, іконки, 3D)
+│   │   ├── earth.usdz              # Альтернативна модель Землі (для AR)
+│   │   ├── earthmap4k.jpg          # Високоякісна текстура Землі
+│   │   └── react.svg               # Логотип React
+│
+│   ├── components/                 # UI-компоненти та логіка сцени
+│   │   ├── ExchangeMode.jsx        # Компонент перемикання режимів бірж
+│   │   ├── ExchangeDot.jsx         # Візуалізація точок бірж на глобусі
+│   │   ├── ExchangeObj.tsx         # Альтернативне представлення біржі (через об'єкт)
+│   │   └── GlobeScene.jsx          # Основна сцена: глобус, точки, світло, камера
+│
+│   ├── data/                       # Статичні дані та типи
+│   │   ├── Types/                  # Типи TypeScript для бірж
+│   │   │   └── Exchange.ts
+│   │   └── exchanges.ts            # Масив бірж з координатами та метаданими
+│
+│   ├── utils/                      # Допоміжні функції
+│   │   └── utils.js                # Конвертація координат, обробка даних
+│
+│   ├── App.css                     # Глобальні стилі або Tailwind-конфігурація
+│   ├── App.jsx                     # Головний компонент додатку
+│   ├── index.css                   # Базові стилі для index.html
+│   └── main.jsx                    # Точка входу в React-додаток
+│
+├── .gitattributes                  # Налаштування Git для кодування, diff тощо
+├── .gitignore                      # Ігноровані файли (наприклад, node_modules, .env)
+├── eslint.config.js                # Конфігурація ESLint для перевірки коду
+├── index.html                      # HTML-шаблон для Vite
+├── LICENSE                         # Ліцензія проєкту
+├── package-lock.json               # Автоматично згенерований файл залежностей
+├── package.json                    # Список залежностей, скрипти, мета-дані проєкту
+├── README.md                       # Документація: опис, інструкції, посилання
+├── tsconfig.json                   # Налаштування TypeScript
+└── vite.config.js                  # Конфігурація Vite: білд, базовий шлях, плагіни
 ```
 
 ---
