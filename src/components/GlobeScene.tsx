@@ -15,8 +15,8 @@ const GlobeScene = () => {
   const clickedOnDotRef = useRef(false); // 🔒 Зберігає стан кліку на точку
 
   useEffect(() => {
-    // 🧠 Ref для збереження стану кліку на точку
-    //clickedOnDotRef = { current: false };
+    const baseUrl = import.meta.env.BASE_URL;
+
 
     // 🔄 Контроль обертання глобуса
     let rotationPaused = false;
@@ -103,11 +103,10 @@ const GlobeScene = () => {
         tooltip.style.top = `${event.clientY + 10}px`;
         tooltip.style.opacity = "1";
         tooltip.innerHTML = `
-        ${
-          dot.userData.logo
-            ? `<img src="${dot.userData.logo}" width="20" style="vertical-align:middle;margin-right:6px;" />`
+        ${dot.userData.logo
+            ? `<img src="${baseUrl}${dot.userData.logo}" width="20" style="vertical-align:middle;margin-right:6px;" />`
             : ""
-        }
+          }
         <span>${dot.userData.name ?? "—"}</span>
       `;
         pauseRotation();
@@ -146,18 +145,15 @@ const GlobeScene = () => {
   <div style="position:relative; padding:12px; max-width:280px;">
     <div id="infoBoxClose" style="position:absolute; top:8px; right:8px; cursor:pointer;">✖</div>
     <div style="display:flex; align-items:center; gap:10px;">
-      ${
-        dot.userData.logo
-          ? `<img src="${dot.userData.logo}" width="40" height="40" style="object-fit:contain;" />`
-          : `<div style="width:40px; height:40px; background:#ccc; border-radius:4px;"></div>`
-      }
+      ${dot.userData.logo
+            ? `<img src="${baseUrl}${dot.userData.logo}" width="40" height="40" style="object-fit:contain;" />`
+            : `<div style="width:40px; height:40px; background:#ccc; border-radius:4px;"></div>`
+          }
       <div>
-        <strong style="font-size:16px;">${
-          dot.userData.name || "—"
-        }</strong><br/>
-        <span style="font-size:13px; color:#666;">${
-          dot.userData.country || "Країна невідома"
-        }</span>
+        <strong style="font-size:16px;">${dot.userData.name || "—"
+          }</strong><br/>
+        <span style="font-size:13px; color:#666;">${dot.userData.country || "Країна невідома"
+          }</span>
       </div>
     </div>
     <p style="margin-top:10px; font-size:14px;">
@@ -169,11 +165,10 @@ const GlobeScene = () => {
       🟢 <strong>Buy:</strong> ${dot.userData.buy ?? "—"}<br/>
       🔴 <strong>Sell:</strong> ${dot.userData.sell ?? "—"}
     </div>
-    ${
-      dot.userData.chart
-        ? `<img src="${dot.userData.chart}" width="100%" style="margin-top:10px; border-radius:4px;" />`
-        : ""
-    }
+    ${dot.userData.chart
+            ? `<img src="${baseUrl}${dot.userData.chart}" width="100%" style="margin-top:10px; border-radius:4px;" />`
+            : ""
+          }
   </div>
 `;
 
