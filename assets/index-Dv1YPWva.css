@@ -135,3 +135,12 @@ button:focus-visible {
     font-size: 20px;
     cursor: pointer
 }
+
+/* 🌗 Темний режим */
+@media (prefers-color-scheme: dark) {
+    #infoBox {
+        background: #1e1e1e;
+        color: #eee;
+        box-shadow: 0 4px 12px #0006;
+    }
+}
