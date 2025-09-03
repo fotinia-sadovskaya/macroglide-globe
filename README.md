@@ -117,4 +117,4 @@ MIT — вільне використання з зазначенням авто
 
 ## 🌐 Онлайн версія
 
-[👉 Відкрити MACROGLIDE Globe](https://fotinia-sadovskaya.github.io/macroglide-globe/)
+Переглянути сайт: [MACROGLIDE Globe](https://fotinia-sadovskaya.github.io/macroglide-globe/)
