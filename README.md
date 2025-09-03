@@ -118,21 +118,20 @@ MIT — вільне використання з зазначенням авто
 
 ## 🌍 Світові біржі
 
-| Біржа           | Логотип                                 | Країна           |
-|-----------------|------------------------------------------|------------------|
-| Binance         | ![Binance](./public/logos/binance.png)   | 🌐 Глобальна     |
-| Coinbase        | ![Coinbase](./public/logos/coinbase.png) | 🇺🇸 США          |
-| NYSE            | ![NYSE](./public/logos/nyse.png)         | 🇺🇸 США          |
-| NASDAQ          | ![NASDAQ](./public/logos/nasdaq.png)     | 🇺🇸 США          |
-| LSE             | ![LSE](./public/logos/lse.png)           | 🇬🇧 Велика Британія |
-| Tokyo SE        | ![Tokyo SE](./public/logos/tokyo.png)    | 🇯🇵 Японія       |
-| Hong Kong SE    | ![Hong Kong](./public/logos/hongkong.png)| 🇭🇰 Гонконг       |
-| Shanghai SE     | ![Shanghai SE](./public/logos/shanghai.png)| 🇨🇳 Китай      |
-| Euronext        | ![Euronext](./public/logos/euronext.png) | 🇪🇺 Європа        |
-| TSX             | ![TSX](./public/logos/tsx.png)           | 🇨🇦 Канада        |
-| BSE India       | ![BSE](./public/logos/bse.png)           | 🇮🇳 Індія         |
-| ASX             | ![ASX](./public/logos/asx.png)           | 🇦🇺 Австралія     |
-
+| Біржа           | Логотип                                   | Країна           |
+|-----------------|--------------------------------------------|------------------|
+| Binance         | <img src="./public/logos/binance.png" width="24" />   | 🌐 Глобальна     |
+| Coinbase        | <img src="./public/logos/coinbase.png" width="24" />  | 🇺🇸 США          |
+| NYSE            | <img src="./public/logos/nyse.png" width="24" />      | 🇺🇸 США          |
+| NASDAQ          | <img src="./public/logos/nasdaq.png" width="24" />    | 🇺🇸 США          |
+| LSE             | <img src="./public/logos/lse.png" width="24" />       | 🇬🇧 Велика Британія |
+| Tokyo SE        | <img src="./public/logos/tokyo.png" width="24" />     | 🇯🇵 Японія       |
+| Hong Kong SE    | <img src="./public/logos/hongkong.png" width="24" />  | 🇭🇰 Гонконг       |
+| Shanghai SE     | <img src="./public/logos/shanghai.png" width="24" />  | 🇨🇳 Китай         |
+| Euronext        | <img src="./public/logos/euronext.png" width="24" />  | 🇪🇺 Європа        |
+| TSX             | <img src="./public/logos/tsx.png" width="24" />       | 🇨🇦 Канада        |
+| BSE India       | <img src="./public/logos/bse.png" width="24" />       | 🇮🇳 Індія         |
+| ASX             | <img src="./public/logos/asx.png" width="24" />       | 🇦🇺 Австралія     |
 ---
 
 ### 🇨🇳 Приклад: Shanghai Stock Exchange
