@@ -12,7 +12,8 @@
 
 #infoBox {
     position: absolute;
-    background: white;
+    background: #fff;
+     color: #222;
     border-radius: 8px;
     padding: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -53,4 +54,13 @@
     border: none;
     font-size: 20px;
     cursor: pointer;
+}
+
+/* 🌗 Темний режим */
+@media (prefers-color-scheme: dark) {
+    #infoBox {
+        background: #1e1e1e;
+        color: #eee;
+        box-shadow: 0 4px 12px #0006;
+    }
 }
