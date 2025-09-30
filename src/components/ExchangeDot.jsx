@@ -47,4 +47,8 @@ const ExchangeDot = ({ exchange, radius = 1.01 }) => {
   );
 };
 
+const handleClick = () => {
+  setSelectedExchange(exchange.id); // або exchange.symbol
+};
+
 export default ExchangeDot;
