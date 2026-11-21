@@ -4,7 +4,7 @@
 
 **[▶ Live demo](https://fotinia-sadovskaya.github.io/macroglide-globe/)** · Status: prototype
 
-[![Globe with stock exchange markers](./screenshots/globe.png)](./screenshots/globe.png)
+[![Globe with stock exchange markers](./screenshots/globe-dark.png)](./screenshots/globe-dark.png)
 
 ---
 
