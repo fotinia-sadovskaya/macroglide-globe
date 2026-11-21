@@ -4,7 +4,7 @@
 
 **[▶ Live demo](https://fotinia-sadovskaya.github.io/macroglide-globe/)** · Status: prototype
 
-[![Globe with stock exchange markers](./screenshots/globe-dark.png)](./screenshots/globe-dark.png)
+[![Globe with stock exchange markers](./screenshots/globe.png)](./screenshots/globe.png)
 
 ---
 
@@ -223,8 +223,8 @@ macroglide-globe/
 ## 📌 TODO
 
 - [x] Анімації переходів між сценами
-- [x] Інтеграція з API для динамічних даних
-- [x] Збереження обраних країн
+- [ ] Інтеграція з API для динамічних даних
+- [ ] Збереження обраних країн
 - [x] Темна тема
 
 ---
@@ -267,7 +267,7 @@ MIT — вільне використання з зазначенням авто
 
 ## 🌍🖼️ Візуалізація глобуса з біржами
 
-[![Глобус з біржами](./screenshots/globe.png)](./screenshots/globe.png)
+[![Глобус з біржами](./screenshots/globe-dark.png)](./screenshots/globe-dark.png)
 
 ---
 
